@@ -2,20 +2,50 @@
 
 # This script will compile an ezquake executable for Ubuntu 20.04
 
-if [ -d "$1" ]; then
-  echo "* Pulling latest ezquake source"
-  (cd "$1" && git pull) || { echo "Cannot pull latest ezquake source"; exit 1; }
-else
-  echo "* Cloning ezquake source repository"
-  (mkdir -p "$1" && cd "$1" && git clone git@github.com:ezQuake/ezquake-source.git) \
-    || { echo "Cannot clone ezquake source repository"; exit 1; }
-fi
+main() {
+  (download_source \
+  && extract_source \
+  && fix_permissions \
+  && compile_source \
+  && move_binary) || echo "Compilation of ezQuake failed."
+  remove_source
+}
 
-echo "* Preparing source for compilation"
-(cd "$1" && find . -iname "*.sh" -exec chmod +x {} \;) \
-  || { echo "Cannot prepare source repository"; exit 1; }
+download_source() {
+  echo "* Downloading source"
+  curl -fsSL -o "$ZIPPATH" https://github.com/ezQuake/ezquake-source/archive/refs/heads/master.zip >/dev/null
+}
 
-docker run --rm -v "$1:/ezquake-source" "ezquake-builder:ubuntu20.04" make -j"$(nproc)" clean
-docker run --rm -v "$1:/ezquake-source" "ezquake-builder:ubuntu20.04" make -j"$(nproc)" all ezquake-builder:ubuntu20.04
+extract_source() {
+  echo "* Extracting source"
+  unzip -qq -o "$ZIPPATH" -d "$TMPDIR" \
+  && mv "$TMPDIR/ezquake-source-master" "$SRCDIR"
+}
 
-# -u "$(id -u):$(id -g)"
+fix_permissions() {
+  echo "* Preparing source for compilation"
+  (cd "$SRCDIR" && find . -iname "*.sh" -exec chmod +x {} \;) \
+    || { echo "Cannot prepare source repository"; exit 1; }
+}
+
+compile_source() {
+  echo "* Compiling source"
+  docker run --rm -u "$(id -u):$(id -g)" -v "$SRCDIR:/ezquake-source" "ezquake-builder:$DISTROTAG" make -s -j"$(nproc)" all
+}
+
+move_binary() {
+  echo "* Moving ezQuake binary to $SCRIPTDIR"
+  mv "$SRCDIR/ezquake-linux-"* "$SCRIPTDIR"
+}
+
+remove_source() {
+  echo "* Removing source"
+  rm -rf "$SRCDIR" "$ZIPPATH" "$TMPDIR"
+}
+
+SCRIPTDIR="$(dirname "$(readlink -f "$0")")"
+SRCDIR="$SCRIPTDIR/.src"
+TMPDIR="$SCRIPTDIR/.tmp"
+ZIPPATH="$SCRIPTDIR/src.zip"
+DISTROTAG="${1:-ubuntu20.04}"
+main

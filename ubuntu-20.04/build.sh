@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build -t ezquake-builder:ubuntu20.04 .
+docker build -t niclaslindstedt/ezquake-builder:ubuntu20.04 .
