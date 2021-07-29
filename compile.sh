@@ -1,6 +1,8 @@
 #!/bin/sh
 
 main() {
+  echo "Compiling $DISTROTAG binary to $THISDIR"
+
   (download_source \
   && extract_source \
   && fix_permissions \
