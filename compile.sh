@@ -5,7 +5,6 @@ main() {
 
   (download_source \
   && extract_source \
-  && fix_permissions \
   && compile_source \
   && move_binary) || echo "Compilation of ezQuake failed."
   remove_source
@@ -20,12 +19,6 @@ extract_source() {
   echo "* Extracting source"
   unzip -qq -o "$ZIPPATH" -d "$TMPDIR" \
   && mv "$TMPDIR/ezquake-source-master" "$SRCDIR"
-}
-
-fix_permissions() {
-  echo "* Preparing source for compilation"
-  (cd "$SRCDIR" && find . -iname "*.sh" -exec chmod +x {} \;) \
-    || { echo "Cannot prepare source repository"; exit 1; }
 }
 
 compile_source() {
