@@ -30,7 +30,7 @@ fix_permissions() {
 
 compile_source() {
   echo "* Compiling source"
-  docker run --rm -u "$(id -u):$(id -g)" -v "$SRCDIR:/ezquake-source" "ezquake-builder:$DISTROTAG" make -s -j"$(nproc)" all
+  docker run --rm -u "$(id -u):$(id -g)" -v "$SRCDIR:/ezquake-source" "niclaslindstedt/ezquake-builder:$DISTROTAG" make -s -j"$(nproc)" all
 }
 
 move_binary() {
