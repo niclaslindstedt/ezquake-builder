@@ -15,3 +15,15 @@ curl -sL https://raw.githubusercontent.com/niclaslindstedt/ezquake-builder/maste
 ```
 curl -sL https://raw.githubusercontent.com/niclaslindstedt/ezquake-builder/master/compile.sh | sh -s ubuntu20.04
 ```
+
+### Ubuntu 18.04
+
+```
+curl -sL https://raw.githubusercontent.com/niclaslindstedt/ezquake-builder/master/compile.sh | sh -s ubuntu18.04
+```
+
+### Fedora 25+
+
+```
+curl -sL https://raw.githubusercontent.com/niclaslindstedt/ezquake-builder/master/compile.sh | sh -s fedora25
+```

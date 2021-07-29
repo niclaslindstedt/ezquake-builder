@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:16.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
@@ -12,8 +12,8 @@ RUN apt-get update \
     libpng-dev \
     libsdl2-2.0-0 \
     libsdl2-dev \
-    libsndfile-dev \
     libspeex-dev \
     libspeexdsp-dev \
   && rm -rf /var/lib/apt/lists/*
+ENV OLD_WAV_LOADING=1
 WORKDIR /ezquake-source
