@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# This script will compile an ezquake executable for Ubuntu 20.04
-
 main() {
   (download_source \
   && extract_source \
@@ -34,8 +32,8 @@ compile_source() {
 }
 
 move_binary() {
-  echo "* Moving ezQuake binary to $SCRIPTDIR"
-  mv "$SRCDIR/ezquake-linux-"* "$SCRIPTDIR"
+  echo "* Moving ezQuake binary to $THISDIR"
+  mv "$SRCDIR/ezquake-linux-"* "$THISDIR"
 }
 
 remove_source() {
@@ -43,9 +41,9 @@ remove_source() {
   rm -rf "$SRCDIR" "$ZIPPATH" "$TMPDIR"
 }
 
-SCRIPTDIR="$(dirname "$(readlink -f "$0")")"
-SRCDIR="$SCRIPTDIR/.src"
-TMPDIR="$SCRIPTDIR/.tmp"
-ZIPPATH="$SCRIPTDIR/src.zip"
+THISDIR="$(dirname "$(readlink -f "$0")")"
+SRCDIR="$THISDIR/.src"
+TMPDIR="$THISDIR/.tmp"
+ZIPPATH="$THISDIR/src.zip"
 DISTROTAG="${1:-ubuntu20.04}"
 main
