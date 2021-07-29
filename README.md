@@ -2,9 +2,15 @@
 
 Build your ezQuake binaries for Linux using only Docker.
 
-## Ubuntu 20.04
+## Compiling
 
-Type the following to compile ezQuake in Ubuntu 20.04:
+### Windows
+
+```
+curl -sL https://raw.githubusercontent.com/niclaslindstedt/ezquake-builder/master/compile.sh | sh -s windows
+```
+
+### Ubuntu 20.04
 
 ```
 curl -sL https://raw.githubusercontent.com/niclaslindstedt/ezquake-builder/master/compile.sh | sh -s ubuntu20.04
