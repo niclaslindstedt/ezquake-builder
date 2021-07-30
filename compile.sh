@@ -1,7 +1,7 @@
 #!/bin/sh
 
 main() {
-  echo "Compiling $DISTROTAG binary to $THISDIR"
+  echo "Compiling $DISTROTAG binary to $TARGET"
 
   (download_source \
   && extract_source \
