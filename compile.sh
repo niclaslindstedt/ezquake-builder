@@ -29,9 +29,9 @@ compile_source() {
 move_binary() {
   echo "* Moving ezQuake binary to $THISDIR"
   if [ "$DISTROTAG" = "windows" ]; then
-    mv "$SRCDIR/ezquake.exe" "$THISDIR"
+    mv "$SRCDIR/ezquake.exe" "$TARGET"
   else
-    mv "$SRCDIR/ezquake-linux-"* "$THISDIR"
+    mv "$SRCDIR/ezquake-linux-"* "$TARGET"
   fi
 }
 
@@ -41,6 +41,7 @@ remove_source() {
 }
 
 THISDIR="$(dirname "$(readlink -f "$0")")"
+TARGET="${2:-$THISDIR}"
 SRCDIR="$THISDIR/.src"
 TMPDIR="$THISDIR/.tmp"
 ZIPPATH="$THISDIR/src.zip"
