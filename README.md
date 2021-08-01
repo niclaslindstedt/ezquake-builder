@@ -1,8 +1,10 @@
 # ezquake-builder
 
-Build your ezQuake binaries for Linux using only Docker.
+Build your ezQuake binaries for Windows/Linux using only Docker (Linux-based).
 
 ## Compiling
+
+Use the commands below to compile ezQuake. The resulting binary will be placed in the current directory if none is given (as second argument, after platform).
 
 ### Windows
 
