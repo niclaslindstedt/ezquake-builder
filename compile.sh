@@ -3,11 +3,17 @@
 main() {
   echo "Compiling $DISTROTAG binary to $TARGET"
 
-  (download_source \
-  && extract_source \
-  && compile_source \
-  && move_binary) || echo "Compilation of ezQuake failed."
-  remove_source
+  {
+    download_source \
+    && extract_source \
+    && compile_source \
+    && move_binary \
+    && remove_source
+  } || {
+    echo "Compilation of ezQuake failed."
+    remove_source
+    exit 1
+  }
 }
 
 download_source() {
