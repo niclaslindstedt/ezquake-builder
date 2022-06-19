@@ -18,8 +18,9 @@ main() {
 }
 
 download_source() {
-  echo "* Downloading source"
-  curl -fsSL -o "$ZIPPATH" https://github.com/ezQuake/ezquake-source/archive/refs/heads/master.zip >/dev/null
+  url="https://github.com/ezQuake/ezquake-source/archive/refs/heads/${BRANCH}.zip"
+  echo "* Downloading source from $url"
+  curl -fsSL -o "$ZIPPATH" "$url" >/dev/null
 }
 
 extract_source() {
@@ -56,6 +57,7 @@ THISDIR="$(dirname "$(readlink -f "$0")")"
 TARGET="${2:-$THISDIR}"
 SRCDIR="$THISDIR/.src"
 TMPDIR="$THISDIR/.tmp"
+BRANCH="${3:-master}"
 ZIPPATH="$THISDIR/src.zip"
 DISTROTAG="${1:-ubuntu20.04}"
 main

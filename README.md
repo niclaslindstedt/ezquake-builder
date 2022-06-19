@@ -42,6 +42,14 @@ curl -sL https://raw.githubusercontent.com/niclaslindstedt/ezquake-builder/maste
 curl -sL https://raw.githubusercontent.com/niclaslindstedt/ezquake-builder/master/compile.sh | sh -s fedora25
 ```
 
+## Compiling a specific ezQuake branch
+
+Just add a branch argument at the end to compile a specific branch.
+
+```
+curl -sL https://raw.githubusercontent.com/niclaslindstedt/ezquake-builder/master/compile.sh | sh -s windows [branch]
+```
+
 ## Compiling using local sources
 
 If you have a source folder locally that you wish to compile:
