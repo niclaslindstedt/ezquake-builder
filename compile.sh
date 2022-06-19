@@ -6,6 +6,7 @@ main() {
   {
     download_source \
     && extract_source \
+    && clean_sources \
     && compile_source \
     && move_binary \
     && remove_source
@@ -25,6 +26,11 @@ extract_source() {
   echo "* Extracting source"
   unzip -qq -o "$ZIPPATH" -d "$TMPDIR" \
   && mv "$TMPDIR/ezquake-source-master" "$SRCDIR"
+}
+
+clean_sources() {
+  echo "* Cleaning sources"
+  find $SRCDIR -iname "*.sh" -exec dos2unix {} \;
 }
 
 compile_source() {

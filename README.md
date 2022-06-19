@@ -41,3 +41,15 @@ curl -sL https://raw.githubusercontent.com/niclaslindstedt/ezquake-builder/maste
 ```
 curl -sL https://raw.githubusercontent.com/niclaslindstedt/ezquake-builder/master/compile.sh | sh -s fedora25
 ```
+
+## Compiling using local sources
+
+If you have a source folder locally that you wish to compile:
+
+```
+./compile-local.sh ../ezquake-source <platform> [output folder]
+```
+
+## Troubleshooting
+
+Run `dos2unix` on all `*.sh` files if there are any problems.
