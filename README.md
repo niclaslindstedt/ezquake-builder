@@ -47,7 +47,7 @@ curl -sL https://raw.githubusercontent.com/niclaslindstedt/ezquake-builder/maste
 If you have a source folder locally that you wish to compile:
 
 ```
-./compile-local.sh ../ezquake-source <platform> [output folder]
+./compile-local.sh <local folder> <platform> [output folder]
 ```
 
 ## Troubleshooting
